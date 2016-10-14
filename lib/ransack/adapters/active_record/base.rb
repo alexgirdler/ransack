@@ -14,7 +14,7 @@ module Ransack
         end
 
         def ransack(params = {}, options = {})
-          Search.new(self, params, options)
+          Search.new(self, params.map { |k, v| [_ransack_aliases[k.to_s] || k, v] }.to_h, options)
         end
 
         def ransacker(name, opts = {}, &block)
